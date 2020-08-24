@@ -1,3 +1,7 @@
 div#allContent {
-    background-color: pink;
+	background-color: pink;
+}
+
+div#gameboard {
+	background-color: white;
 }
