@@ -1,15 +1,35 @@
+var clicks = 0;
+var tiles = 9
+
 var images = new Array();
 
-for (let i = 0; i < 9; i++)
-    images.push("images/pokemon" + ".png");
-
-var clicks = 0;
+for (let i = 0; i < tiles; i++)
+	images.push("images/cat" + i + ".png");
 
 /*
     Documentation
 */
 function prepareBoard() {
-
+	//Check the browser is capable of basic things
+	if (!document.getElementByTagName)
+		return;
+	if (!document.getElementById)
+		return;
+	if (!document.getElementbyId("gameboard"))
+		return;
+	
+	//Find the board
+	board = document.getElementById("gameboard");
+	
+	for (i = 0; i < tiles; i ++) {
+		newElement = document.createElement('img');
+		newElement.src = images[i];
+		newElement.id = i;
+		newElement.alt = "cat" + i;
+		
+		newElement.onclick = function(){return move(this);};
+		board.appendChild(newElement);
+	}
 }
 
 /*
