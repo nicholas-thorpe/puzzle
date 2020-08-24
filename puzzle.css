@@ -1,7 +1,20 @@
 div#allContent {
 	background-color: pink;
+	margin: 0 auto;
+	width: 985px;
+}
+
+h1 {
+	color: black;
+	text-align: center;
+}
+
+img {
+	margin: 2px;
 }
 
 div#gameboard {
 	background-color: white;
+	margin: 0 auto;
+	width: 501px;
 }

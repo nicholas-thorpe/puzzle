@@ -7,7 +7,7 @@ for (let i = 0; i < tiles; i++)
 	images.push("images/cat" + (i + 1) + ".png");
 
 /*
-    Adds the tiled image to the board
+	Adds the tiled image to the board
 */
 function prepareBoard() {
 	var board;
@@ -36,7 +36,14 @@ function prepareBoard() {
 }
 
 /*
-    Documentation
+	Documentation
+*/
+function move() {
+
+}
+
+/*
+	Documentation
 */
 function reset() {
 
