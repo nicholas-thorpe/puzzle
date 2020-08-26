@@ -16,12 +16,21 @@ img {
 	height: 217px;
 }
 
-img.hover {
+img:hover {
 	opacity: 0.5;
 }
 
-div#gameboard {
-	background-color: white;
+div#row1, div#row2, div#row3 {
 	margin: 0 auto;
+	padding: 0px;
 	width: 489px;
+	height: 217px;
+}
+
+input#reset {
+	margin: 5px;
+}
+
+input#score {
+	margin: 5px:
 }
