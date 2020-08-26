@@ -21,6 +21,7 @@ img:hover {
 }
 
 div#row1, div#row2, div#row3 {
+	background-color: white;
 	margin: 0 auto;
 	padding: 0px;
 	width: 489px;

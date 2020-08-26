@@ -23,7 +23,7 @@ function prepareBoard() {
 	//Find the board
 	rows = new Array(3)
 	for (let i = 0; i < 3; i++)
-		rows[i] = document.getElementById('row' + i);
+		rows[i] = document.getElementById('row' + (i + 1));
 	
 	//Add the images
 	for (let i = 0; i < 3; i++) {
@@ -32,12 +32,14 @@ function prepareBoard() {
 			newElement.src = images[i][j];
 			newElement.id = (i + j);
 			newElement.alt = "cat" + (i + j);
-			newElement.onclick = function(){return move(this);};
 			
-			var row = row[i];
+			var row = rows[i];
 			row.appendChild(newElement);
 		}
-	}	
+	}
+	
+	//Randomly shuffle the images
+	
 }
 
 /*
