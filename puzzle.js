@@ -6,6 +6,8 @@ var images = new Array();
 for (let i = 0; i < tiles; i++)
 	images.push("images/cat" + (i + 1) + ".png");
 
+images.push("images/blank.png");
+
 /*
 	Adds the tiled image to the board
 */
@@ -30,9 +32,11 @@ function prepareBoard() {
 		newElement.id = i;
 		newElement.alt = "cat" + i;
 		
-		//newElement.onclick = function(){return move(this);};
+		newElement.onclick = function(){return move(this);};
 		board.appendChild(newElement);
 	}
+	
+	
 }
 
 /*

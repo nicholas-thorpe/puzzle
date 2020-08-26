@@ -10,11 +10,18 @@ h1 {
 }
 
 img {
-	margin: 2px;
+	margin: 0px;
+	padding: 0px;
+	width: 163px;
+	height: 217px;
+}
+
+img.hover {
+	opacity: 0.5;
 }
 
 div#gameboard {
 	background-color: white;
 	margin: 0 auto;
-	width: 501px;
+	width: 489px;
 }
