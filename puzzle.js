@@ -92,7 +92,7 @@ function shuffle() {
 	//After these moves, checks if the board is solved, and if so shuffles again
 	do {
 		for (let i = 0; i < 1000; i++) {
-
+			return; //Leave this in here until the function is finished
 		}
 	} while (isSolved())
 }
@@ -102,7 +102,7 @@ function shuffle() {
 */
 function isSolved() {
 	//Compares the current positions to the solved one
-	//If they are the same, the board is solved
+	//If a difference is found, the board is not solved
 	
 	for (let i = 0; i < 3; i++)
 		for (let j = 0; i < 3; j++)
