@@ -1,12 +1,21 @@
-div#allContent {
+body {
 	background-color: pink;
-	margin: 0 auto;
-	width: 985px;
 }
 
-h1 {
+div {
+	margin: 0 auto;
+}
+
+div#allContent {
+	width: 600px;
+}
+
+h1, div#display {
+	background-color: white;
 	color: black;
 	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 img {
@@ -22,16 +31,11 @@ img:hover {
 
 div#row1, div#row2, div#row3 {
 	background-color: white;
-	margin: 0 auto;
 	padding: 0px;
 	width: 489px;
 	height: 217px;
 }
 
-input#reset {
+input#reset, input#score {
 	margin: 5px;
-}
-
-input#score {
-	margin: 5px:
 }

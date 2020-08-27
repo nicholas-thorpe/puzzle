@@ -77,7 +77,7 @@ function reset() {
 	
 	
 	//Randomly shuffle the images
-	shuffle()
+	shuffle();
 }
 
 /*
@@ -117,6 +117,18 @@ function isSolved() {
 */
 function move() { 
 
+}
+
+/*
+	Things to do when the user wins
+*/
+function end() {
+	//Update the score box
+	score = document.getElementById("score");
+	score.text = clicks;
+	
+	//Alert the user of the win
+	alert("You win! Score: " + clicks);
 }
 
 window.onload = prepareBoard;
