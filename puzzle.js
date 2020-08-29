@@ -10,6 +10,11 @@ for (let i = 0; i < 3; i++)
 	for (let j = 0; j < 3; j++)
 		images[i][j] = ("images/cat" + ((i * 3) + j + 1) + ".png");
 
+//Prepare the element array
+var elements = new Array(3);
+for (let i = 0; i < 3; i++)
+	elements[i] = new Array(3);
+
 /*
 	Adds the tiled image to the board
 	Make miscellaneous preparations
@@ -34,7 +39,13 @@ function prepareBoard() {
 			newElement.src = images[i][j];
 			newElement.id = ((i * 3) + j);
 			newElement.alt = "cat" + ((i * 3) + j + 1);
-			newElement.onclick = function(){return move();};
+			
+			//Store element info
+			elements[i][j] = newElement;
+			
+			//Add the onclick handler to all but the blank tile
+			if ((i + j) > 0)
+				newElement.onclick = function(){return move();};
 			
 			//Load the image onto the board
 			var row = rows[i];
@@ -42,6 +53,9 @@ function prepareBoard() {
 		}
 	}
 	
+	//Makes the top left image blank
+	elements[0][0].src = blank;
+		
 	//Randomly shuffle the images
 	shuffle();
 	
@@ -59,7 +73,16 @@ function reset() {
 	//Set the board back to default
 	for (let i = 0; i < 3; i++)
 		for (let j = 0; j < 3; j++)
-			document.getElementById((i * 3) + j).src = images[i][j];
+			elements[i][j].src = images[i][j];
+	
+	//Makes the top left image blank
+	elements[0][0] = blank;
+	
+	//Enable the tiles' onclick handlers
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			if ((i + j) > 0)
+				elements[i][j].onclick = function(){return move();};
 	
 	//Randomly shuffle the images
 	shuffle();
@@ -68,18 +91,16 @@ function reset() {
 /*
 	Randomly shuffles the images
 */
-function shuffle() {
-	//Makes the top left image blank
-	var blankTile = document.getElementById(0);
-	blankTile.src = blank;
-	
+function shuffle() {	
 	//Makes 1000 random moves
 	//After these moves, checks if the board is solved, and if so shuffles again
 	do {
 		for (let i = 0; i < 1000; i++) {
-			rand1 = Math.floor(Math.random() * 9);
-			rand2 = Math.floor(Math.random() * 9);
-			swap(rand1, rand2);
+			randx1 = Math.floor(Math.random() * 3);
+			randy1 = Math.floor(Math.random() * 3);
+			randx2 = Math.floor(Math.random() * 3);
+			randx2 = Math.floor(Math.random() * 3);
+			swap(randx1, randy1, randx2, randx2);
 		}
 	} while (isSolved())
 }
@@ -93,10 +114,11 @@ function isSolved() {
 	for (let i = 0; i < 3; i++)
 		for (let j = 0; j < 3; j++)
 			if ((i + j) > 0) {
-				var current = document.getElementById((i * 3) + j).src;
+				var current = elements[i][j].src;
 				var solved = images[i][j];
 				current = current.slice(current.length - 5);
 				solved = solved.slice(solved.length - 5);
+				
 				if (current != solved)
 					return false;
 			}
@@ -107,26 +129,44 @@ function isSolved() {
 /*
 	Handles tile swapping for shuffle() and move()
 */
-function swap(tile1, tile2) {
-	var temp = document.getElementById(tile1).src;
-	document.getElementById(tile1).src = document.getElementById(tile2).src;
-	document.getElementById(tile2).src = temp;
+function swap(x1, x2, y1, y2) {
+	//Checks if the swap is valid
+	
+	//Swaps the tiles
+	var temp = elements[x1][y1].src;
+	elements[x1][y1].src = elements[x2][y2].src;
+	elements[x2][y2].src = temp;
 }
 
 /*
-	Documentation
+	Onclick handler for all tiles
 */
 function move() { 
 	
+	
+	
+	//Increment the click counter
+	clicks++;
+	
+	//If the board is solved, go to the end state
+	if (isSolved())
+		end();
 }
 
 /*
 	Things to do when the user wins
 */
 function end() {
+	//Disable all tiles' onclick handlers
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			elements[i][j].onclick = NULL;
+	
+	//Change the blank tile to the original picture
+	elements[0][0].src = images[0][0];
+	
 	//Update the score box
-	score = document.getElementById("score");
-	score.text = clicks;
+	document.getElementById("score").text = clicks;
 	
 	//Alert the user of the win
 	alert("You win! Score: " + clicks);
