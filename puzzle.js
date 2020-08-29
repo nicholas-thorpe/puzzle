@@ -79,8 +79,8 @@ function reset() {
 	elements[0][0] = blank;
 	
 	//Enable the tiles' onclick handlers
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
+	for (let i = 0; i < 3; i++)
+		for (let j = 0; j < 3; j++)
 			if ((i + j) > 0)
 				elements[i][j].onclick = function(){return move();};
 	
@@ -158,8 +158,8 @@ function move() {
 */
 function end() {
 	//Disable all tiles' onclick handlers
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
+	for (let i = 0; i < 3; i++)
+		for (let j = 0; j < 3; j++)
 			elements[i][j].onclick = NULL;
 	
 	//Change the blank tile to the original picture
