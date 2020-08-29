@@ -10,20 +10,6 @@ for (let i = 0; i < 3; i++)
 	for (let j = 0; j < 3; j++)
 		images[i][j] = ("images/cat" + ((i * 3) + j + 1) + ".png");
 
-//Prepare to store the positions
-var positions = new Array(3)
-for (let i = 0; i < 3; i++)
-	positions[i] = new Array(3);
-
-//Stores the solved positions
-//Does this here so it doesn't repeat the process every time it checks for the solved state
-var solved = new Array(3)
-for (let i = 0; i < 3; i++) 
-	solved[i] = new Array(3)
-for (let i = 0; i < 3; i++)
-	for (let j = 0; j < 3; j++)
-		solved[i][j] = (i + j)
-
 /*
 	Adds the tiled image to the board
 	Make miscellaneous preparations
@@ -46,11 +32,9 @@ function prepareBoard() {
 			//Create the image and load its properties
 			newElement = document.createElement('img');
 			newElement.src = images[i][j];
-			newElement.id = (i + j);
-			newElement.alt = "cat" + (i + j);
-			
-			//Store the element's position
-			positions[i][j] = (i + j);
+			newElement.id = ((i * 3) + j);
+			newElement.alt = "cat" + ((i * 3) + j + 1);
+			newElement.onclick = function(){return move();};
 			
 			//Load the image onto the board
 			var row = rows[i];
@@ -62,8 +46,7 @@ function prepareBoard() {
 	shuffle();
 	
 	//Enable the reset button's onclick handler
-	resetButton = document.getElementById("reset");
-	resetButton.onclick = function(){return reset();};
+	document.getElementById("reset").onclick = function(){return reset();};
 }
 
 /*
@@ -74,7 +57,9 @@ function reset() {
 	clicks = 0;
 	
 	//Set the board back to default
-	
+	for (let i = 0; i < 3; i++)
+		for (let j = 0; j < 3; j++)
+			document.getElementById((i * 3) + j).src = images[i][j];
 	
 	//Randomly shuffle the images
 	shuffle();
@@ -92,7 +77,9 @@ function shuffle() {
 	//After these moves, checks if the board is solved, and if so shuffles again
 	do {
 		for (let i = 0; i < 1000; i++) {
-			return; //Leave this in here until the function is finished
+			rand1 = Math.floor(Math.random() * 9);
+			rand2 = Math.floor(Math.random() * 9);
+			swap(rand1, rand2);
 		}
 	} while (isSolved())
 }
@@ -101,22 +88,36 @@ function shuffle() {
 	Checks to see if the board is solved
 */
 function isSolved() {
-	//Compares the current positions to the solved one
+	//Compares the current images to the solved images
 	//If a difference is found, the board is not solved
-	
 	for (let i = 0; i < 3; i++)
-		for (let j = 0; i < 3; j++)
-			if (solved[i][j] != positions[i][j])
-				return false
+		for (let j = 0; j < 3; j++)
+			if ((i + j) > 0) {
+				var current = document.getElementById((i * 3) + j).src;
+				var solved = images[i][j];
+				current = current.slice(current.length - 5);
+				solved = solved.slice(solved.length - 5);
+				if (current != solved)
+					return false;
+			}
 	
-	return true
+	return true;
+}
+
+/*
+	Handles tile swapping for shuffle() and move()
+*/
+function swap(tile1, tile2) {
+	var temp = document.getElementById(tile1).src;
+	document.getElementById(tile1).src = document.getElementById(tile2).src;
+	document.getElementById(tile2).src = temp;
 }
 
 /*
 	Documentation
 */
 function move() { 
-
+	
 }
 
 /*
